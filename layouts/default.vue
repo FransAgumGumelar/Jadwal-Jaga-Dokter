@@ -1,7 +1,7 @@
 <template>
     <v-app>
-        <appbar />
         <sidebar />
+        <appbar />
         <konten />
         <footer />
     </v-app>

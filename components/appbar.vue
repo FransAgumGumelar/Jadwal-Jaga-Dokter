@@ -1,12 +1,13 @@
 <template>
     <v-app-bar class="bg-red">
-        <div class="center">
-            <div class="text-h2 "> 
+        <v-spacer />
+       
+        <div class="text-h2 "> 
             {{ now }}
-        </div>
         </div>
         
         <v-spacer />
+        
 
         
     </v-app-bar>

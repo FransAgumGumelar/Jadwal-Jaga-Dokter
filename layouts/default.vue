@@ -1,7 +1,8 @@
 <template>
     <v-app>
-        <header />
-        <contain />
+        <appbar />
+        <sidebar />
+        <konten />
         <footer />
     </v-app>
 

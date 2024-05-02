@@ -8,7 +8,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div class="font-weight-black">
                             EMERGENSI
                         </div>
                         {{ data }}
@@ -17,7 +17,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             BEDAH UMUM
                         </div>
                         {{ data }}
@@ -26,7 +26,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             BEDAH PLASTIK
                         </div>
                         {{ data }}
@@ -38,7 +38,7 @@
             <v-row class="ml-5 mr-5">
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             BEDAH SARAF
                         </div>
                         {{ data }}
@@ -48,7 +48,7 @@
                 <v-col cols="12" md="4" >
                         
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             DOKTER UMUM / KOMPLEMENTER
                         </div>
                         {{ data }}
@@ -57,7 +57,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             FORENSIK
                         </div>
                         {{ data }}
@@ -68,7 +68,7 @@
             <v-row class="ml-5 mr-5 mb-5">
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             GIGI DAN MULUT
                         </div>
                         {{ data }}
@@ -77,7 +77,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             JANTUNG
                         </div>
                         {{ data }}
@@ -86,7 +86,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             JIWA
                         </div>
                         {{ data }}
@@ -104,7 +104,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             KESEHATAN ANAK
                         </div>
                         {{ data }}
@@ -113,7 +113,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             KULIT DAN KELAMIN
                         </div>
                         {{ data }}
@@ -122,7 +122,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             MATA
                         </div>
                         {{ data }}
@@ -134,7 +134,7 @@
                 <v-row class="ml-5 mr-5">
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             MIKROBIOLOGI
                         </div>
                         {{ data }}
@@ -144,7 +144,7 @@
                 <v-col cols="12" md="4" >
                         
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             OBG
                         </div>
                         {{ data }}
@@ -153,7 +153,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             ORTHOPAEDI
                         </div>
                         {{ data }}
@@ -164,7 +164,7 @@
                 <v-row class="ml-5 mr-5 mb-5">
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             PARASITOLOGI
                         </div>
                         {{ data }}
@@ -173,7 +173,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             PARU
                         </div>
                         {{ data }}
@@ -182,7 +182,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             PENYAKIT DALAM
                         </div>
                         {{ data }}
@@ -200,7 +200,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             RADIOLOGI
                         </div>
                         {{ data }}
@@ -209,7 +209,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             RADIOTERAPI
                         </div>
                         {{ data }}
@@ -218,7 +218,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             REHAP MEDIK
                         </div>
                         {{ data }}
@@ -230,7 +230,7 @@
                 <v-row class="ml-5 mr-5">
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             SARAF
                         </div>
                         {{ data }}
@@ -240,7 +240,7 @@
                 <v-col cols="12" md="4" >
                         
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             THT
                         </div>
                         {{ data }}
@@ -249,7 +249,7 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             UROLOGI
                         </div>
                         {{ data }}
@@ -260,7 +260,7 @@
                 <v-row class="ml-5 mr-5 mb-5">
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             PATOLOGI
                         </div>
                         {{ data }}
@@ -269,9 +269,11 @@
 
                 <v-col cols="12" md="4" >
                     <v-card height="235">
-                        <div>
+                        <div div class="font-weight-black">
                             ANASTESIOLOGI & TERAPI INTENSIF
                         </div>
+                        {{ data }}
+                        {{ data }}
                         {{ data }}
                     </v-card>
                 </v-col>

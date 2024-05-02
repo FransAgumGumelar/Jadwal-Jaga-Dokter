@@ -17,6 +17,7 @@
       </v-row>
     </v-footer>
   </template>
+  
   <script>
     export default {
       data: () => ({

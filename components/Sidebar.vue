@@ -9,8 +9,8 @@
             
             <v-list density="compact" nav>
                 <v-list-item prepend-icon="mdi-shield-account-outline" value="dashboard" to="/"></v-list-item>
-                <v-list-item prepend-icon="mdi-fishbowl-outline" value="messages" to=""></v-list-item>
-                <v-list-item prepend-icon="mdi-fruit-grapes-outline" value="messages" to=""></v-list-item>
+                <v-list-item prepend-icon="mdi-fishbowl-outline" value="messages" to="/dpjp"></v-list-item>
+                <v-list-item prepend-icon="mdi-fruit-grapes-outline" value="messages" to="/ppds"></v-list-item>
             </v-list>
         </v-navigation-drawer>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <sidebar />
+        <!-- <sidebar /> -->
         <appbar />
         <konten />
         <footer />

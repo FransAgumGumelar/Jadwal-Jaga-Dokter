@@ -1,46 +1,36 @@
 <template>
-    <v-carousel
-      
-      show-arrows="hover"
-      cycle
-      hide-delimiter-background
-    >
-      <v-carousel-item
-        v-for="(slide, i) in slides"
-        :key="i"
-      >
-        <v-sheet
-          :color="colors[i]"
-          height="100%"
-        >
-          <div class="d-flex fill-height justify-center align-center">
-            <div class="text-h2">
-              {{ slide }} Slide
-            </div>
-          </div>
-        </v-sheet>
+    
+
+  <v-carousel height="100%" cycle :interval="5000" hide-delimiters>        
+      <!-- 
+      hasil = count jumlah data ksm / 9
+      hasil looping carousel -->
+      <v-carousel-item class="bg-indigo-darken-3 text-center" v-for="index in Math.ceil(daftar_ksm.data.length / 9)" :key="index">
+          <v-row class="mt-5 ml-5 mr-5" v-for="ind_1 in 3" :key="ind_1">
+              <v-col cols="12" md="4" mb="4" v-for="ind_2 in 3" :key="ind_2">
+                  <v-card height="235">
+                      <div class="font-weight-black">
+                          {{ index }}
+                      </div>
+                  <!-- isi -->
+                  </v-card>
+              </v-col>
+          </v-row>
       </v-carousel-item>
-    </v-carousel>
-  </template>
-  <script>
-    export default {
-      data () {
-        return {
-          colors: [
-            'indigo',
-            'warning',
-            'pink darken-2',
-            'red lighten-1',
-            'deep-purple accent-4',
-          ],
-          slides: [
-            'First',
-            'Second',
-            'Third',
-            'Fourth',
-            'Fifth',
-          ],
-        }
-      },
-    }
-  </script>
+  </v-carousel>
+
+</template>
+
+
+
+<script setup lang="ts">
+
+  const data = await useFetch('https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter/5dac5e6a-f4ad-43c2-acff-98dd4158a10b')
+
+  // const daftar_ksm = await useFetch ('https://satu.dev.rssa.id/items/daftar_ksm')   
+  // const panjang_daftar_ksm = daftar_ksm.length()
+
+
+const { data: daftar_ksm } = await useFetch(() => 'https://satu.dev.rssa.id/items/daftar_ksm');
+
+</script>

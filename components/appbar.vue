@@ -1,5 +1,6 @@
 <template>
-    <v-app-bar class="bg-red">
+    <v-container>
+        <v-app-bar class="bg-red">
         <v-spacer />
        
         <div class="text-h2 "> 
@@ -11,6 +12,8 @@
 
         
     </v-app-bar>
+    </v-container>
+    
 
 </template>
 

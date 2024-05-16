@@ -1,26 +1,30 @@
 <template>
-    <v-container>
-        <v-app-bar class="bg-red">
-        <v-spacer />
-       
-        <div class="text-h2 "> 
-            {{ now }}
-        </div>
-        
-        <v-spacer />
-        
+        <v-app-bar color="GREY">
+            <template v-slot:prepend>
+                <v-app-bar-nav-icon></v-app-bar-nav-icon>
+            </template>
 
-        
+            <v-app-bar-title>Title</v-app-bar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-btn icon>
+                <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+
+        </v-app-bar>
+
+  </template>
+
+<!-- <template>
+    <v-app-bar class="bg-red">
+        APPBAR
     </v-app-bar>
-    </v-container>
-    
 
 </template>
 
 <script setup lang="ts">
-    import { useNow, useDateFormat } from '@vueuse/core'
     
-    const now = useDateFormat(useNow(), "dddd, DD MMMM YYYY HH:mm:ss", {locales:'id-ID'})
     
 
-</script>
+</script> -->

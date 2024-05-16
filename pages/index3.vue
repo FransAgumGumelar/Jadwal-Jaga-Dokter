@@ -1,10 +1,10 @@
 <template>
-<v-carousel cycle :interval="5500" hide-delimiters show-arrows="hover" height="520" class="mx-auto">
-<v-carousel-item  v-for="index in Math.ceil(tampungksm.data.length / 9)" :key="index">
+<v-carousel cycle :interval="5000" hide-delimiters show-arrows="hover" height="520" class="mx-auto">
+<v-carousel-item>
     <!-- {{ tampungksm.data.length }} -->
     <v-row align="center" justify="center" dense >
         <v-col align="center"          
-        v-for= "(daf , i) in tampungksm.data" 
+                v-for= "i in tampungksm.data" 
                 :key= "i"
             
                 cols="12"
@@ -47,7 +47,7 @@
 </v-carousel>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
 import { useNow, useDateFormat } from '@vueuse/core'    
 const now = useDateFormat(useNow(), "dddd, DD MMMM YYYY HH:mm:ss", {locales:'id-ID'})

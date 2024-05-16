@@ -1,4 +1,55 @@
 <template>
+    HALAMAN INDEX
+    <container>
+        <div align="center" mb="50">
+            <h1> <jam /> </h1>
+        </div>
+    </container>
+
+
+
+<!-- <v-carousel cycle :interval="5000" hide-delimiters show-arrows="hover">
+    <v-carousel-item> -->
+        <v-row>
+            <v-col align="center"          
+                        v-for= "(daftar , i) in ksm.data" 
+                        :key= "i"
+                        cols="13"
+                    >
+                    
+                <v-card variant="tonal"
+                        width="230"
+                        height="auto"
+                        color="surface-variant"
+                        > 
+                    <!-- <v-img height="150" src="/public/logoksm/paru.jpeg"></v-img> -->
+                        
+                    <v-card-title align="center">
+                        <h3>{{ ksm.data[i].Nama_ksm }}</h3>
+                    </v-card-title>
+                <v-divider></v-divider>
+                    <v-card-text align="center">
+                        <v-sheet align="center">
+                            <v-img height="70" src="/public/logorole/spv.png"></v-img>
+                                <h3 align="center">Dr. Syaifulloh</h3>
+                        </v-sheet>
+                        <v-sheet>
+                            <v-img height="70" src="/public/logorole/chief.png"></v-img>
+                            <h3 align="center">Dr. Syaifulloh</h3>
+                        </v-sheet>
+                        <v-sheet>
+                            <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
+                            <h3 align="center">Dr. Syaifulloh</h3>
+                        </v-sheet>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    <!-- </v-carousel-item>v-slide-group-item>
+</v-carousel> -->
+</template>
+
+<!-- <template>
 <v-container>  
         
         <div class="text-h4 " align="center"> 
@@ -793,16 +844,18 @@
 
 </v-carousel>
 
-</template>
+</template> -->
 
-<script setup lang="ts">
+<script setup>
 
 import { useNow, useDateFormat } from '@vueuse/core'    
 const now = useDateFormat(useNow(), "dddd, DD MMMM YYYY HH:mm:ss", {locales:'id-ID'})
     
 
 
-const ksm = await $fetch('https://satu.dev.rssa.id/items/daftar_ksm')
+const tampungksm = await useFetch ('https://satu.dev.rssa.id/items/daftar_ksm')
+const ksm = tampungksm.data
+
 
 
 </script>

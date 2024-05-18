@@ -1,15 +1,17 @@
 <template>
     HALAMAN INDEX
-    <container>
+
         <div align="center" mb="50">
             <h1> <jam /> </h1>
         </div>
-    </container>
+
 
 
 
 <!-- <v-carousel cycle :interval="5000" hide-delimiters show-arrows="hover">
     <v-carousel-item> -->
+        <!-- {{ jadwal.data.length }} -->
+        <!-- <pre>{{ jadwal.data }}</pre> -->
         <v-row>
             <v-col align="center"          
                         v-for= "(daftar , i) in ksm.data" 
@@ -19,27 +21,33 @@
                     
                 <v-card variant="tonal"
                         width="230"
-                        height="auto"
+                        height="430"
                         color="surface-variant"
                         > 
                     <!-- <v-img height="150" src="/public/logoksm/paru.jpeg"></v-img> -->
                         
-                    <v-card-title align="center">
-                        <h3>{{ ksm.data[i].Nama_ksm }}</h3>
+                    <v-card-title>
+                        
                     </v-card-title>
-                <v-divider></v-divider>
+                
                     <v-card-text align="center">
-                        <v-sheet align="center">
+                        <v-sheet align="center"  height="55" class="bg-red" no-gutters>
+                            <h2 align="center">{{ ksm.data[i].Nama_ksm }}</h2>
+                            
+                        </v-sheet>
+                        <v-divider></v-divider>
+                        <v-sheet class="mt-2">
                             <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                                <h3 align="center">Dr. Syaifulloh</h3>
+                                <h3 align="center" class="mt-2" >{{ jadwal.data[i].Nama_petugas }}</h3>
+                                {{ jadwal.data[i].Jaga_awal }}
                         </v-sheet>
-                        <v-sheet>
+                        <v-sheet class="mt-2">
                             <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                            <h3 align="center">Dr. Syaifulloh</h3>
+                            <h3 align="center" class="mt-2">Dr. Syaifulloh</h3>
                         </v-sheet>
-                        <v-sheet>
+                        <v-sheet class="mt-2">
                             <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                            <h3 align="center">Dr. Syaifulloh</h3>
+                            <h3 align="center" class="mt-2">Dr. Syaifulloh</h3>
                         </v-sheet>
                     </v-card-text>
                 </v-card>
@@ -848,14 +856,12 @@
 
 <script setup>
 
-import { useNow, useDateFormat } from '@vueuse/core'    
-const now = useDateFormat(useNow(), "dddd, DD MMMM YYYY HH:mm:ss", {locales:'id-ID'})
-    
-
 
 const tampungksm = await useFetch ('https://satu.dev.rssa.id/items/daftar_ksm')
 const ksm = tampungksm.data
 
 
+const tampungjadwal = await useFetch ('https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter?fields=Nama_petugas,Ksm,Level,Jaga_awal,Jaga_akhir')
+const jadwal = tampungjadwal.data
 
 </script>

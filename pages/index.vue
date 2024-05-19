@@ -5,14 +5,15 @@
             <h1> <jam /> </h1>
         </div>
 
-
-
-
 <!-- <v-carousel cycle :interval="5000" hide-delimiters show-arrows="hover">
     <v-carousel-item> -->
         <!-- {{ jadwal.data.length }} -->
         <!-- <pre>{{ jadwal.data }}</pre> -->
-        <v-row>
+        
+        <v-row >
+            <pre>{{ jadwal.data }}</pre>
+            <div v-for="(item, id) in jadwal.data" :key="item.id">
+            <div v-if="item.Jaga_awal <= formattedTime && item.Jaga_akhir >= formattedTime">
             <v-col align="center"          
                         v-for= "(daftar , i) in ksm.data" 
                         :key= "i"
@@ -36,22 +37,38 @@
                             
                         </v-sheet>
                         <v-divider></v-divider>
-                        <v-sheet class="mt-2">
+                        <v-sheet class="mt-2" :key="item.Ksm.Nama_ksm" :subtitle="item.Nama_petugas" :title="item.Level.Nama_level_igd">
                             <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                                <h3 align="center" class="mt-2" >{{ jadwal.data[i].Nama_petugas }}</h3>
-                                {{ jadwal.data[i].Jaga_awal }}
+                                <!-- <h3 align="center" class="mt-2" >{{ jadwal.data[i].Nama_petugas }}</h3>
+                                {{ jadwal.data[i].Jaga_awal }} -->
+                                {{ item.Ksm.Nama_ksm }}
+                                {{ item.Level.Nama_level_igd }}
+                                {{ item.Nama_petugas }}
                         </v-sheet>
                         <v-sheet class="mt-2">
                             <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                            <h3 align="center" class="mt-2">Dr. Syaifulloh</h3>
+                            <!-- <h3 align="center" class="mt-2">Dr. Syaifulloh</h3> -->
+                            {{ item.Level.Nama_level_igd }}
+                            {{ item.Nama_petugas }}
                         </v-sheet>
                         <v-sheet class="mt-2">
                             <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                            <h3 align="center" class="mt-2">Dr. Syaifulloh</h3>
+                            <!-- <h3 align="center" class="mt-2">Dr. Syaifulloh</h3> -->
+                            {{ item.Level.Nama_level_igd }}
+                            {{ item.Nama_petugas }}
                         </v-sheet>
+                        <br/>
+                        {{ item.Jaga_awal }}
+                        <br />
+                        {{ item.Jaga_akhir }}
+                        
                     </v-card-text>
                 </v-card>
             </v-col>
+                    </div>
+                </div>
+                
+           
         </v-row>
     <!-- </v-carousel-item>v-slide-group-item>
 </v-carousel> -->
@@ -857,11 +874,44 @@
 <script setup>
 
 
+
 const tampungksm = await useFetch ('https://satu.dev.rssa.id/items/daftar_ksm')
 const ksm = tampungksm.data
 
+// const tampungjadwal = await useFetch ('https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter?fields=Nama_petugas,Ksm,Level,Jaga_awal,Jaga_akhir')
+// const jadwal = tampungjadwal.data
 
-const tampungjadwal = await useFetch ('https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter?fields=Nama_petugas,Ksm,Level,Jaga_awal,Jaga_akhir')
-const jadwal = tampungjadwal.data
+// Auto refresh halaman
+// setTimeout(function(){
+//     location.reload();
+// }, 5000); 
+
+// setTimeout(() => {
+//   location.reload('http://localhost:3000');
+// }, 3000);
+
+
+
+
+
+// wek e mbak zakiya
+import { useNow, useDateFormat } from "@vueuse/core";
+
+//untuk pengecekan date time
+const realTime = new Date();
+
+const formattedTime = `${realTime.getFullYear()}-${pad(realTime.getMonth() + 1)}-${pad(realTime.getDate())}T${pad(realTime.getHours())}:${pad(realTime.getMinutes())}:${pad(realTime.getSeconds())}`;
+
+const kemarin = `${realTime.getFullYear()}-${pad(realTime.getMonth() + 1)}-${pad(realTime.getDate() - 1)}`;
+const besok = `${realTime.getFullYear()}-${pad(realTime.getMonth() + 1)}-${pad(realTime.getDate() + 1)}`;
+
+function pad(number) {
+  return number < 10 ? `0${number}` : number.toString();
+}
+
+const { data: jadwal } = useFetch(`https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter?fields=id, Nama_petugas,Ksm.Nama_ksm,Level.Nama_level_igd,Jaga_awal,Jaga_akhir&filter[Level][_neq]=3`);
+const jmlKsm = await $fetch(`https://satu.dev.rssa.id/items/daftar_ksm`);
+
+
 
 </script>

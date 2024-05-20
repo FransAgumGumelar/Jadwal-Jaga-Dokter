@@ -4,13 +4,19 @@
         <div align="center" mb="50">
             <h1> <jam /> </h1>
         </div>
-
-        <v-row >
-            <PRE>{{ tampungKSM }}</PRE>
+        <v-carousel height="100%" cycle :interval="5000" hide-delimiters>        
+        <!-- 
+        hasil = count jumlah data ksm / 9
+        hasil looping carousel -->
+        <v-carousel-item class="text-center" v-for="index in Math.ceil(daftar_ksm.data.length / 5)" :key="index">
+        <v-row v-for="ind_1 in 1" :key="ind_1">
+            <!-- <PRE>{{ tampungKSM }}</PRE> -->
+            
             <v-col align="center"          
                         v-for="(bebas, i) in tampungKSM" 
                         :key= "i"
                         cols="13"
+                        
                     >
                     
                 <v-card variant="tonal"
@@ -18,9 +24,9 @@
                         height="430"
                         color="surface-variant"
                 > 
-
+                {{ index}}
                     
-                    <v-sheet align="center"  height="65" class="bg-red" no-gutters>
+                    <v-sheet align="center"  height="80" class="bg-red" no-gutters>
                         <h2 align="center">{{ bebas.ket_ksm }}</h2>
                     </v-sheet>
                     <v-card-text 
@@ -48,11 +54,13 @@
             </v-col>
 
         </v-row>
-
+</v-carousel-item>
+</v-carousel>
 </template>
 
 
 <script setup>
+const { data: daftar_ksm, } = await useFetch(() => 'https://satu.dev.rssa.id/items/daftar_ksm');
   import { ref, onMounted, onUnmounted } from "vue";
   
   // ____________________________________________________________________
@@ -77,14 +85,14 @@
     waktuSekarang.value.detik = formatDuaDigit(sekarang.getSeconds());
   };
   
-  let waktuIntervalId;
-  onMounted(() => {
-    waktuIntervalId = setInterval(updateWaktu, 1000);
-  });
+  // let waktuIntervalId;
+  // onMounted(() => {
+  //   waktuIntervalId = setInterval(updateWaktu, 1000);
+  // });
   
-  onUnmounted(() => {
-    clearInterval(waktuIntervalId);
-  });
+  // onUnmounted(() => {
+  //   clearInterval(waktuIntervalId);
+  // });
   
   
   
@@ -140,19 +148,19 @@ const tanggalSekarang = new Date();
         }
       }
     });
-    setTimeout(updateKSM, 20000); // Jadwalkan pembaruan berikutnya setiap 10 detik
+    setTimeout(updateKSM, 60000); // Jadwalkan pembaruan berikutnya setiap 10 detik
   };
   
   updateKSM(); // Panggilan awal untuk memulai proses
   
-  async function fetch(binding) {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: binding,
-      showConfirmButton: false,
-      timer: 2000,
-    });
-  }
+  // async function fetch(binding) {
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: "success",
+  //     title: binding,
+  //     showConfirmButton: false,
+  //     timer: 2000,
+  //   });
+  // }
   </script>
 

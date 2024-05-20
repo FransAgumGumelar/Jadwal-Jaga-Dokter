@@ -1,16 +1,16 @@
 <template>
-  <v-navigation-drawer width="mx-auto" height="mx-auto" class="bg-red">
+  
     <div align="center">
       <v-img
         class="mx-auto my-6"
-        max-width="500"
+        max-width="250"
         src="/public/logorssa.png"
       ></v-img>
   
       <v-card
             class="mx-auto pa-12 pb-8"
             elevation="8"
-            max-width="448"
+            max-width="350"
             rounded="lg"
           >
             <div class="text-subtitle-1 text-medium-emphasis">Username</div>
@@ -60,7 +60,7 @@
             
       </v-card>
     </div>
-  </v-navigation-drawer>
+ 
   </template>
 
   <script setup>

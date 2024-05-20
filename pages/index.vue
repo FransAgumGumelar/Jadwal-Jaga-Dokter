@@ -8,7 +8,7 @@
 <!-- <v-carousel cycle :interval="5000" hide-delimiters show-arrows="hover">
     <v-carousel-item> -->
         <!-- {{ jadwal.data.length }} -->
-        <!-- <pre>{{ jadwal.data }}</pre> -->
+        <pre>{{ jadwal.data }}</pre>
         
         <v-row >
             <pre>{{ jadwal.data }}</pre>
@@ -894,7 +894,7 @@ const ksm = tampungksm.data
 
 
 
-// wek e mbak zakiya
+
 import { useNow, useDateFormat } from "@vueuse/core";
 
 //untuk pengecekan date time

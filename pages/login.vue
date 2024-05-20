@@ -63,7 +63,7 @@
   </v-navigation-drawer>
   </template>
 
-  <script setup lang="ts">
+  <script setup>
   definePageMeta({
   layout: 'login'
 })

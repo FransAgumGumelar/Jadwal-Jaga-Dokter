@@ -16,15 +16,3 @@
 
   </template>
 
-<!-- <template>
-    <v-app-bar class="bg-red">
-        APPBAR
-    </v-app-bar>
-
-</template>
-
-<script setup lang="ts">
-    
-    
-
-</script> -->

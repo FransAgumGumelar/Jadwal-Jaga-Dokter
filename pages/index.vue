@@ -1,917 +1,168 @@
 <template>
     HALAMAN INDEX
-
+        
         <div align="center" mb="50">
             <h1> <jam /> </h1>
         </div>
-
-<!-- <v-carousel cycle :interval="5000" hide-delimiters show-arrows="hover">
-    <v-carousel-item> -->
-        <!-- {{ jadwal.data.length }} -->
-        <!-- <pre>{{ jadwal.data }}</pre> -->
+        <!-- {{ tampungKSM.length }} -->
+        <v-carousel height="100%" cycle :interval="5000" hide-delimiters>        
+        <!-- 
+        hasil = count jumlah data ksm / 9
+        hasil looping carousel -->
         
-        <v-row >
-            <pre>{{ jadwal.data }}</pre>
-            <div v-for="(item, id) in jadwal.data" :key="item.id">
-            <div v-if="item.Jaga_awal <= formattedTime && item.Jaga_akhir >= formattedTime">
+        <v-carousel-item class="text-center" v-for="index in Math.ceil(tampungKSM.length / 7)" :key="index">
+        <v-row v-for="ind_1 in 1" :key="ind_1">
+            <!-- <PRE>{{ tampungKSM }}</PRE> -->
+            
             <v-col align="center"          
-                        v-for= "(daftar , i) in ksm.data" 
+                        v-for="(bebas, i) in tampungKSM" 
                         :key= "i"
                         cols="13"
+                        
                     >
                     
                 <v-card variant="tonal"
                         width="230"
                         height="430"
                         color="surface-variant"
-                        > 
-                    <!-- <v-img height="150" src="/public/logoksm/paru.jpeg"></v-img> -->
-                        
-                    <v-card-title>
-                        
-                    </v-card-title>
-                
-                    <v-card-text align="center">
-                        <v-sheet align="center"  height="55" class="bg-red" no-gutters>
-                            <h2 align="center">{{ ksm.data[i].Nama_ksm }}</h2>
+                > 
+                {{ index}}
+                    
+                    <v-sheet align="center"  height="80" class="bg-red" no-gutters>
+                        <h2 align="center">{{ bebas.ket_ksm }}</h2>
+                    </v-sheet>
+                    <v-card-text 
+                        v-for="(jadwal, indexJadwal) in bebas.jadwal"
+                        :key="indexJadwal">
+                        <v-sheet v-if="
+                                new Date() >= new Date(jadwal.Jaga_awal) &&
+                                new Date() <= new Date(jadwal.Jaga_akhir)
+                            ">
+
+
+                            <v-sheet-item class="mt-2">
+                                <h2>{{ jadwal.Level.Nama_level_igd }}</h2>
+                            </v-sheet-item>
+                            <v-sheet-item class="mt-2">
+                                {{ jadwal.Nama_petugas }}
+                            </v-sheet-item>
                             
+
                         </v-sheet>
-                        <v-divider></v-divider>
-                        <v-sheet class="mt-2" :key="item.Ksm.Nama_ksm" :subtitle="item.Nama_petugas" :title="item.Level.Nama_level_igd">
-                            <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                                <!-- <h3 align="center" class="mt-2" >{{ jadwal.data[i].Nama_petugas }}</h3>
-                                {{ jadwal.data[i].Jaga_awal }} -->
-                                {{ item.Ksm.Nama_ksm }}
-                                {{ item.Level.Nama_level_igd }}
-                                {{ item.Nama_petugas }}
-                        </v-sheet>
-                        <v-sheet class="mt-2">
-                            <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                            <!-- <h3 align="center" class="mt-2">Dr. Syaifulloh</h3> -->
-                            {{ item.Level.Nama_level_igd }}
-                            {{ item.Nama_petugas }}
-                        </v-sheet>
-                        <v-sheet class="mt-2">
-                            <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                            <!-- <h3 align="center" class="mt-2">Dr. Syaifulloh</h3> -->
-                            {{ item.Level.Nama_level_igd }}
-                            {{ item.Nama_petugas }}
-                        </v-sheet>
-                        <br/>
-                        {{ item.Jaga_awal }}
-                        <br />
-                        {{ item.Jaga_akhir }}
-                        
                     </v-card-text>
+                
+                    
                 </v-card>
             </v-col>
-                    </div>
-                </div>
-                
-           
+
         </v-row>
-    <!-- </v-carousel-item>v-slide-group-item>
-</v-carousel> -->
+</v-carousel-item>
+</v-carousel>
 </template>
 
-<!-- <template>
-<v-container>  
-        
-        <div class="text-h4 " align="center"> 
-            {{ now }}
-        </div>
-        
-</v-container>
-
-<v-carousel cycle :interval="5000" hide-delimiters show-arrows="hover" height="520">
-<v-carousel-item>
-
-    <v-row align="center" dense>
-        <v-col align="center">
-            <v-card variant="tonal"
-                    width="230"
-                    height="1000"
-                    color="surface-variant"
-                    > 
-                <v-img height="150" src="/public/logoksm/Anastesiologi & Terapi Intensif.png"></v-img>
-                
-                <v-card-title align="center">
-                    <h3>{{ ksm.data[0].Nama_ksm }}</h3>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-text align="center">
-                    <v-sheet align="center">
-                        <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                </v-card-text>
-            </v-card>
-        </v-col>
-
-        <v-col align="center">
-            <v-card variant="tonal"
-                    width="230"
-                    height="1000"
-                    color="surface-variant"
-                    > 
-                <v-img height="150" src="/public/logoksm/bedahplastik.jpg"></v-img>
-                
-                <v-card-title align="center">
-                    <h3>{{ ksm.data[1].Nama_ksm }}</h3>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-text align="center">
-                    <v-sheet align="center">
-                        <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                </v-card-text>
-            </v-card>
-        </v-col>
-
-        <v-col align="center">
-            <v-card variant="tonal"
-                    width="230"
-                    height="1000"
-                    color="surface-variant"
-                    > 
-                <v-img height="150" src="/public/logoksm/bedahsaraf.png"></v-img>
-                
-                <v-card-title align="center">
-                    <h3>{{ ksm.data[2].Nama_ksm }}</h3>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-text align="center">
-                    <v-sheet align="center">
-                        <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                </v-card-text>
-            </v-card>
-        </v-col>
-
-        <v-col align="center">
-            <v-card variant="tonal"
-                    width="230"
-                    height="1000"
-                    color="surface-variant"
-                    > 
-                <v-img height="150" src="/public/logoksm/bedahumum.png"></v-img>
-                
-                <v-card-title align="center">
-                    <h3>{{ ksm.data[3].Nama_ksm }}</h3>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-text align="center">
-                    <v-sheet align="center">
-                        <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                </v-card-text>
-            </v-card>
-        </v-col>
-
-        <v-col align="center">
-            <v-card variant="tonal"
-                    width="230"
-                    height="1000"
-                    color="surface-variant"
-                    > 
-                <v-img height="150" src="/public/logoksm/dokterumum.png"></v-img>
-                
-                <v-card-title align="center">
-                    <h3>{{ ksm.data[4].Nama_ksm }}</h3>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-text align="center">
-                    <v-sheet align="center">
-                        <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                </v-card-text>
-            </v-card>
-        </v-col>
-
-        <v-col align="center">
-            <v-card variant="tonal"
-                    width="230"
-                    height="1000"
-                    color="surface-variant"
-                    > 
-                <v-img height="150" src="/public/logoksm/emergency.jpg"></v-img>
-                
-                <v-card-title align="center">
-                    <h3>{{ ksm.data[5].Nama_ksm }}</h3>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-text align="center">
-                    <v-sheet align="center">
-                        <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                </v-card-text>
-            </v-card>
-        </v-col>
-
-        <v-col align="center">
-            <v-card variant="tonal"
-                    width="230"
-                    height="1000"
-                    color="surface-variant"
-                    > 
-                <v-img height="150" src="/public/logoksm/forensik.jpg"></v-img>
-                
-                <v-card-title align="center">
-                    <h3>{{ ksm.data[6].Nama_ksm }}</h3>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-text align="center">
-                    <v-sheet align="center">
-                        <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                    <v-sheet>
-                        <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                        <h3 align="center">Dr. Syaifulloh</h3>
-                    </v-sheet>
-                </v-card-text>
-            </v-card>
-        </v-col>
-</v-row>
-
-</v-carousel-item>
-
-<v-carousel-item>
-
-<v-row align="center" dense>
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/gimu.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[7].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/ipd.jpg"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[8].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/jantung.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[9].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/jiwa.jpg"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[10].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/kedokteran anak.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[11].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/mata.jpg"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[12].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/Mikrobiologi.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[13].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-</v-row>
-
-</v-carousel-item>
-
-<v-carousel-item>
-
-<v-row align="center" dense>
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/OBG.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[14].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/ortho.jpg"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[15].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/Parasitologi.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[16].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/paru.jpeg"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[17].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/Patologi.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[18].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/Radiologi.jpg"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[19].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/Radioterapi.jpg"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[20].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-</v-row>
-
-</v-carousel-item>
-
-<v-carousel-item>
-
-<v-row align="center" dense>
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/Rehab Medik.jpg"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[21].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/Saraf.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[22].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/jantung.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[23].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/jantung.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[24].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    <v-col align="center">
-        <v-card variant="tonal"
-                width="230"
-                height="1000"
-                color="surface-variant"
-                > 
-            <v-img height="150" src="/public/logoksm/jantung.png"></v-img>
-            
-            <v-card-title align="center">
-                <h3>{{ ksm.data[25].Nama_ksm }}</h3>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text align="center">
-                <v-sheet align="center">
-                    <v-img height="70" src="/public/logorole/spv.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/chief.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-                <v-sheet>
-                    <v-img height="70" src="/public/logorole/jaga2.png"></v-img>
-                    <h3 align="center">Dr. Syaifulloh</h3>
-                </v-sheet>
-            </v-card-text>
-        </v-card>
-    </v-col>
-
-    
-</v-row>
-
-</v-carousel-item>
-
-
-
-
-</v-carousel>
-
-</template> -->
 
 <script setup>
+// const { data: daftar_ksm, } = await useFetch(() => 'https://satu.dev.rssa.id/items/daftar_ksm');
+  import { ref, onMounted, onUnmounted } from "vue";
+  
+  // ____________________________________________________________________
+  const waktuSekarang = ref({
+    tanggal: new Date().getDate(),
+    bulan: new Date().getMonth() + 1, // Bulan dimulai dari 0, jadi tambahkan 1
+    tahun: new Date().getFullYear(),
+    jam: new Date().getHours(),
+    menit: new Date().getMinutes(),
+    detik: new Date().getSeconds(),
+  });
+  
+  const formatDuaDigit = (nilai) => (nilai <= 9 ? `0${nilai}` : nilai);
+  
+  const updateWaktu = () => {
+    const sekarang = new Date();
+    waktuSekarang.value.tanggal = formatDuaDigit(sekarang.getDate());
+    waktuSekarang.value.bulan = formatDuaDigit(sekarang.getMonth() + 1);
+    waktuSekarang.value.tahun = sekarang.getFullYear();
+    waktuSekarang.value.jam = formatDuaDigit(sekarang.getHours());
+    waktuSekarang.value.menit = formatDuaDigit(sekarang.getMinutes());
+    waktuSekarang.value.detik = formatDuaDigit(sekarang.getSeconds());
+  };
+  
+  // let waktuIntervalId;
+  // onMounted(() => {
+  //   waktuIntervalId = setInterval(updateWaktu, 1000);
+  // });
+  
+  // onUnmounted(() => {
+  //   clearInterval(waktuIntervalId);
+  // });
+  
+  
+  
+const tanggalSekarang = new Date();
+  const tanggalKemarin = new Date(
+    tanggalSekarang.getFullYear(),
+    tanggalSekarang.getMonth(),
+    tanggalSekarang.getDate() - 7
+  )
+    .toISOString()
+    .split("T")[0];
+  const tanggalBesok = new Date(
+    tanggalSekarang.getFullYear(),
+    tanggalSekarang.getMonth(),
+    tanggalSekarang.getDate() + 7
+  )
+    .toISOString()
+    .split("T")[0];
+  
+ 
+  
+  let tampungKSM = ref([]);
+  const updateKSM = async () => {
+    console.log("ini refresh");
+    tampungKSM.value = []; // Kosongkan array sebelum mengisi ulang
+    const _dataKSM = await $fetch(`https://satu.dev.rssa.id/items/daftar_ksm`);
+    const ksm = _dataKSM.data;
+    const _jdwlDokter = await $fetch(
+      `https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter?fields=id,Nama_petugas,Ksm,Level.Nama_level_igd,Jaga_awal,Jaga_akhir&filter[Jaga_awal][_between]=[${tanggalKemarin}, ${tanggalBesok}]`
+    );
+    const jdwlDokters = _jdwlDokter.data;
+  
+    ksm.forEach((_ksm) => {
+      let idksm = _ksm["id"];
+  
+      let filterjdwl = jdwlDokters.filter((jadwal) => jadwal["Ksm"] === idksm);
+      if (filterjdwl && filterjdwl.length > 0) {
+        let tampiljadwalBaru = {
+          idksm: _ksm["id"],
+          ket_ksm: _ksm["Nama_ksm"],
+          jadwal: [],
+        };
+        const sekarang = new Date();
+        filterjdwl.forEach((jdwl) => {
+          const awal = new Date(jdwl.Jaga_awal);
+          const akhir = new Date(jdwl.Jaga_akhir);
+          if (sekarang >= awal && sekarang <= akhir) {
+            tampiljadwalBaru.jadwal.push(jdwl);
+          }
+        });
+        if (tampiljadwalBaru.jadwal.length > 0) {
+          tampungKSM.value.push(tampiljadwalBaru);
+        }
+      }
+    });
+    setTimeout(updateKSM, 60000); // Jadwalkan pembaruan berikutnya setiap 10 detik
+  };
+  
+  updateKSM(); // Panggilan awal untuk memulai proses
+  
+  // async function fetch(binding) {
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: "success",
+  //     title: binding,
+  //     showConfirmButton: false,
+  //     timer: 2000,
+  //   });
+  // }
+  </script>
 
-
-
-const tampungksm = await useFetch ('https://satu.dev.rssa.id/items/daftar_ksm')
-const ksm = tampungksm.data
-
-// const tampungjadwal = await useFetch ('https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter?fields=Nama_petugas,Ksm,Level,Jaga_awal,Jaga_akhir')
-// const jadwal = tampungjadwal.data
-
-// Auto refresh halaman
-// setTimeout(function(){
-//     location.reload();
-// }, 5000); 
-
-// setTimeout(() => {
-//   location.reload('http://localhost:3000');
-// }, 3000);
-
-
-
-
-
-
-import { useNow, useDateFormat } from "@vueuse/core";
-
-//untuk pengecekan date time
-const realTime = new Date();
-
-const formattedTime = `${realTime.getFullYear()}-${pad(realTime.getMonth() + 1)}-${pad(realTime.getDate())}T${pad(realTime.getHours())}:${pad(realTime.getMinutes())}:${pad(realTime.getSeconds())}`;
-
-const kemarin = `${realTime.getFullYear()}-${pad(realTime.getMonth() + 1)}-${pad(realTime.getDate() - 1)}`;
-const besok = `${realTime.getFullYear()}-${pad(realTime.getMonth() + 1)}-${pad(realTime.getDate() + 1)}`;
-
-function pad(number) {
-  return number < 10 ? `0${number}` : number.toString();
-}
-
-const { data: jadwal } = useFetch(`https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter?fields=id, Nama_petugas,Ksm.Nama_ksm,Level.Nama_level_igd,Jaga_awal,Jaga_akhir&filter[Level][_neq]=3`);
-const jmlKsm = await $fetch(`https://satu.dev.rssa.id/items/daftar_ksm`);
-
-
-
-</script>

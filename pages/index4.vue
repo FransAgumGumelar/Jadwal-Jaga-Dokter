@@ -5,6 +5,7 @@
             <h1> <jam /> </h1>
         </div>
 
+
         <v-row>
             <v-col align="center" v-for="(bebas, i) in tampungKSM" :key= "i" cols="13">
                     
@@ -129,7 +130,7 @@ const tanggalSekarang = new Date();
         }
       }
     });
-    setTimeout(updateKSM, 5000); // Jadwalkan pembaruan berikutnya setiap 10 detik
+    setTimeout(updateKSM, 60000); // Jadwalkan pembaruan berikutnya setiap 10 detik
   };
   
   updateKSM(); // Panggilan awal untuk memulai proses

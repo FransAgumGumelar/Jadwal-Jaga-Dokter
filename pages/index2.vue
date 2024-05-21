@@ -141,7 +141,7 @@ const updateKSM = async () => {
       }
     }
   });
-  setTimeout(updateKSM, 20000); // Jadwalkan pembaruan berikutnya setiap 10 detik
+  setTimeout(updateKSM, 60000); // Jadwalkan pembaruan berikutnya setiap 10 detik
 };
 
 updateKSM(); // Panggilan awal untuk memulai proses

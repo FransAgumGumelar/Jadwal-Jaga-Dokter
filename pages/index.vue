@@ -12,7 +12,7 @@
         
         <v-carousel-item class="text-center" v-for="index in Math.ceil(tampungKSM.length / 7)" :key="index">
         <v-row v-for="ind_1 in 1" :key="ind_1">
-            <!-- <PRE>{{ tampungKSM }}</PRE> -->
+            <PRE>{{ tampungKSM }}</PRE>
             
             <v-col align="center"          
                         v-for="(bebas, i) in tampungKSM" 

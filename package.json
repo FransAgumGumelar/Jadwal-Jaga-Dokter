@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
+    "@splidejs/splide": "^4.1.4",
+    "@splidejs/vue-splide": "^0.6.12",
     "@vueuse/core": "^10.9.0",
     "nuxt": "^3.11.2",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue3-carousel": "^0.3.3"
   },
   "devDependencies": {
     "vite-plugin-vuetify": "^2.0.3",

@@ -1,36 +1,21 @@
 <template>
-    HALAMAN INDEX 3
+    HALAMAN INDEX 4
         
         <div align="center" mb="50">
             <h1> <jam /> </h1>
         </div>
-        <!-- {{ tampungKSM.length }} -->
-        <v-carousel height="100%" cycle :interval="5000" hide-delimiters>        
-        <!-- 
-        hasil = count jumlah data ksm / 9
-        hasil looping carousel -->
+
         
-        <v-carousel-item class="text-center" v-for="index in Math.ceil(tampungKSM.length / 7)" :key="index">
-        <v-row v-for="ind_1 in 1" :key="ind_1">
-            <!-- <PRE>{{ tampungKSM }}</PRE> -->
-            
-            <v-col align="center"          
-                        v-for="(bebas, i) in tampungKSM" 
-                        :key= "i"
-                        cols="13"
-                        
-                    >
+        
+        <v-row>
+            <v-col align="center" v-for="(bebas, i) in tampungKSM" :key= "i" cols="13">
                     
-                <v-card variant="tonal"
-                        width="230"
-                        height="430"
-                        color="surface-variant"
-                > 
-                {{ index}}
-                    
+                <v-card variant="tonal" width="230" height="430" color="surface-variant"> 
+                
                     <v-sheet align="center"  height="80" class="bg-red" no-gutters>
                         <h2 align="center">{{ bebas.ket_ksm }}</h2>
                     </v-sheet>
+
                     <v-card-text 
                         v-for="(jadwal, indexJadwal) in bebas.jadwal"
                         :key="indexJadwal">
@@ -38,34 +23,30 @@
                                 new Date() >= new Date(jadwal.Jaga_awal) &&
                                 new Date() <= new Date(jadwal.Jaga_akhir)
                             ">
-
-
-                            <v-sheet-item class="mt-2">
+                            <!-- <v-sheet-item class="mt-2">
                                 <h2>{{ jadwal.Level.Nama_level_igd }}</h2>
                             </v-sheet-item>
                             <v-sheet-item class="mt-2">
                                 {{ jadwal.Nama_petugas }}
-                            </v-sheet-item>
-                            
-
+                            </v-sheet-item> -->
                         </v-sheet>
                     </v-card-text>
-                
-                    
+            
                 </v-card>
             </v-col>
-
         </v-row>
-</v-carousel-item>
-</v-carousel>
 </template>
 
 
 <script setup>
+
+
+
+
 // const { data: daftar_ksm, } = await useFetch(() => 'https://satu.dev.rssa.id/items/daftar_ksm');
+
   import { ref, onMounted, onUnmounted } from "vue";
   
-  // ____________________________________________________________________
   const waktuSekarang = ref({
     tanggal: new Date().getDate(),
     bulan: new Date().getMonth() + 1, // Bulan dimulai dari 0, jadi tambahkan 1

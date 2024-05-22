@@ -1,8 +1,10 @@
 <template>
     <v-app>
-        <appbar />
-        <konten />
-        <footer />
+        <!-- <appbar /> -->
+        <konten>
+            <footer />
+        </konten>
+        
     </v-app>
     
 

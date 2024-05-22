@@ -11,29 +11,24 @@
     
     
     
-    <split-carousel height="500px" >
-      <split-carousel-item v-for="(bebas, i) in tampungKSM" :key= "i" height="100px">
+    <split-carousel cycle :interval="10000" height="600px" hide-delimiters>
+      <div class="d-flex flex-no-wrap justify-space-between">
+      <split-carousel-item v-for="(bebas, i) in tampungKSM" :key= "i" dense>
         
-        <v-row>
-            <v-col align="center" cols="13">
+        <v-row align="center" justify="center" dense>
+            <v-col align="center" cols="12" md="2" dense>
               
-                <v-card variant="tonal" width="250" height="470px" color="surface-variant" class="bg-grey"> 
+                <v-card variant="tonal" width="250" height="570px" class="bg-grey"> 
 
                   <!-- Nama KSM -->
-                    <v-sheet  align="center"  height="75px" class="bg-red" no-gutters>
+                    <v-sheet  align="center"  height="75px" class="bg-red" >
                         <h2 align="center">
                           {{ bebas.ket_ksm }}
                         </h2>
-                        
-                        
-                        
                     </v-sheet>
 
-                    <v-card-text 
-                    height="100px"
-                        v-for="(jadwal, indexJadwal) in bebas.jadwal"
-                        :key="indexJadwal">
-                        <v-sheet height="80px" v-if="new Date() >= new Date(jadwal.Jaga_awal) && new Date() <= new Date(jadwal.Jaga_akhir)">
+                    <v-card-text v-for="(jadwal, indexJadwal) in bebas.jadwal" :key="indexJadwal">
+                        <v-sheet v-if="new Date() >= new Date(jadwal.Jaga_awal) && new Date() <= new Date(jadwal.Jaga_akhir)">
                               
                             <v-sheet-item class="mt-2">
                                 <h2>{{ jadwal.Level.Nama_level_igd }}</h2>
@@ -48,18 +43,20 @@
                 </v-card>
             </v-col>
         </v-row>
+      
       </split-carousel-item>
+    </div>
     </split-carousel>
 
   
 
   <v-footer class="bg-black">
-                    <v-row justify="center" no-gutters>
-                        <v-col class="text-center mt-4" cols="12">
-                        {{ new Date().getFullYear() }} — <strong>RSUD DR DSIFUL ANWAR</strong>
-                        </v-col>
-                    </v-row>
-                </v-footer>
+      <v-row justify="center" no-gutters>
+        <v-col class="text-center mt-4" cols="12">
+          {{ new Date().getFullYear() }} — <strong>RSUD DR DSIFUL ANWAR</strong>
+        </v-col>
+      </v-row>
+  </v-footer>
 </template>
 
 

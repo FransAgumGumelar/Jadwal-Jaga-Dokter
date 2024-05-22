@@ -1,52 +1,33 @@
 <template>
 
-  <v-row dense>
-    
-        <v-card
-          :color="color"
-          variant="tonal"
-          width="240px"
-          height="400px"
-          class="align-center"
-          color="surface-variant"
-          v-for="(bebas, i) in tampungKSM" :key="i"
-        >
-          <v-card-item>
-            <div class="text-center">
-              <div class="text-h6 mb-1">
-                {{ bebas.ket_ksm }}
-              </div>
-              <v-list
-                v-for="(jadwal, indexJadwal) in bebas.jadwal"
-                :key="indexJadwal"
-              >
-                <v-list-item
-                  v-if="
-                    new Date() >= new Date(jadwal.Jaga_awal) &&
-                    new Date() <= new Date(jadwal.Jaga_akhir)
-                  "
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>{{
-                      jadwal.Nama_petugas
-                    }}</v-list-item-title>
-                    <v-list-item-subtitle>{{
-                      jadwal.Level.Nama_level_igd
-                    }}</v-list-item-subtitle>
-                    <v-list-item-subtitle>{{
-                      jadwal.Jaga_awal
-                    }}</v-list-item-subtitle>
-                    <v-list-item-subtitle>{{
-                      jadwal.Jaga_akhir
-                    }}</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </div>
-          </v-card-item>
-        </v-card>
-    
-  </v-row>
+<v-row justify="center" v-for="(bebas, i) in tampungKSM" :key= "i" dense>
+            <v-col align="center"  dense>
+              
+                <v-card variant="tonal" width="250" height="570px" class="bg-grey"> 
+
+                  <!-- Nama KSM -->
+                    <v-sheet  align="center"  height="75px" class="bg-red" >
+                        <h2 align="center">
+                          {{ bebas.ket_ksm }}
+                        </h2>
+                    </v-sheet>
+
+                    <v-card-text v-for="(jadwal, indexJadwal) in bebas.jadwal" :key="indexJadwal">
+                        <v-sheet v-if="new Date() >= new Date(jadwal.Jaga_awal) && new Date() <= new Date(jadwal.Jaga_akhir)">
+                              
+                            <v-sheet-item class="mt-2">
+                                <h2>{{ jadwal.Level.Nama_level_igd }}</h2>
+                            </v-sheet-item>
+                            <v-sheet-item class="mt-2">
+                                {{ jadwal.Nama_petugas }}
+                            </v-sheet-item>
+
+                        </v-sheet>
+                    </v-card-text>
+            
+                </v-card>
+            </v-col>
+        </v-row>
 </template>
 
 <script setup>
@@ -141,7 +122,7 @@ const updateKSM = async () => {
       }
     }
   });
-  setTimeout(updateKSM, 60000); // Jadwalkan pembaruan berikutnya setiap 10 detik
+  setTimeout(updateKSM, 20000); // Jadwalkan pembaruan berikutnya setiap 10 detik
 };
 
 updateKSM(); // Panggilan awal untuk memulai proses

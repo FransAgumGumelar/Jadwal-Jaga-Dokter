@@ -1,168 +1,214 @@
 <template>
-    HALAMAN INDEX
-        
-        <div align="center" mb="50">
-            <h1> <jam /> </h1>
-        </div>
-        <!-- {{ tampungKSM.length }} -->
-        <v-carousel height="100%" cycle :interval="5000" hide-delimiters>        
-        <!-- 
-        hasil = count jumlah data ksm / 9
-        hasil looping carousel -->
-        
-        <v-carousel-item class="text-center" v-for="index in Math.ceil(tampungKSM.length / 7)" :key="index">
-        <v-row v-for="ind_1 in 1" :key="ind_1">
-            <PRE>{{ tampungKSM }}</PRE>
-            
-            <v-col align="center"          
-                        v-for="(bebas, i) in tampungKSM" 
-                        :key= "i"
-                        cols="13"
-                        
-                    >
-                    
-                <v-card variant="tonal"
-                        width="230"
-                        height="430"
-                        color="surface-variant"
-                > 
-                {{ index}}
-                    
-                    <v-sheet align="center"  height="80" class="bg-red" no-gutters>
-                        <h2 align="center">{{ bebas.ket_ksm }}</h2>
-                    </v-sheet>
-                    <v-card-text 
-                        v-for="(jadwal, indexJadwal) in bebas.jadwal"
-                        :key="indexJadwal">
-                        <v-sheet v-if="
-                                new Date() >= new Date(jadwal.Jaga_awal) &&
-                                new Date() <= new Date(jadwal.Jaga_akhir)
-                            ">
+  <split-carousel cycle :interval="1000" height="550px" hide-delimiters>
+    <div class="d-flex flex-no-wrap justify-space-between">
+      <split-carousel-item v-for="(bebas, i) in tampungKSM" :key="i" dense>
+        <v-row align="center" justify="center" dense>
+          <v-col align="center" cols="12" md="2" dense>
+            <v-card
+              variant="tonal"
+              width="370"
+              height="450px"
+              class="bg-white rounded-xl"
+              id="warnacard"
+            >
+              <!-- Nama KSM -->
+              <v-sheet
+                align="center"
+                height="100px"
+                class="font-bold text-white"
+                id="warnasheet"
+                ><br />
+                <h2 align="center">
+                  {{ bebas.ket_ksm }}
+                </h2>
+              </v-sheet>
 
+              <v-card-text
+                v-for="(jadwal, indexJadwal) in bebas.jadwal"
+                :key="indexJadwal"
+                rounded="xl"
+              >
+      
+                <v-sheet
+                  v-if="
+                    new Date() >= new Date(jadwal.Tanggal_awal) &&
+                    new Date() <= new Date(jadwal.Tanggal_akhir)
+                  "
+                  rounded="xl"
+                >
+                  <v-sheet-item class="mt-2 rounded-xl">
+                    <h2>{{ jadwal.Tingkat_supervisi }}</h2>
+                  </v-sheet-item> 
+                  <v-sheet-item class="mt-2">
+                    <h3>{{ jadwal.Dokter_jaga }}</h3>
+                  </v-sheet-item>
+                  <v-sheet-item class="mt-2">
+                    <h3>{{ jadwal.Tanggal_awal }}</h3>
+                  </v-sheet-item>
+                  <v-sheet-item class="mt-2">
+                    <h3>{{ jadwal.Tanggal_akhir }}</h3>
+                  </v-sheet-item>
+                  <!-- <v-sheet-item class="mt-2" v-for="(data, i) in bebas.jadwal.Nama_dpjp.Gelar_belakang" :key="daftar_gelar_belakang_id">
+                    <h3>{{ data.daftar_gelar_belakang_id }}</h3>                
+                  </v-sheet-item> -->
 
-                            <v-sheet-item class="mt-2">
-                                <h2>{{ jadwal.Level.Nama_level_igd }}</h2>
-                            </v-sheet-item>
-                            <v-sheet-item class="mt-2">
-                                {{ jadwal.Nama_petugas }}
-                            </v-sheet-item>
-                            
-
-                        </v-sheet>
-                    </v-card-text>
-                
-                    
-                </v-card>
-            </v-col>
-
+                  <!-- <v-sheet-item class="mt-2" >
+                    <h3>{{ jadwal.Nama_dpjp.Gelar_belakang }}</h3>    
+                  </v-sheet-item>
+                  <v-sheet-item class="mt-2" >
+                    <h3>{{ jadwal.Nama_dpjp.Gelar_depan }}</h3>                
+                  </v-sheet-item> -->
+                </v-sheet>
+       
+              </v-card-text>            
+            </v-card>        
+          </v-col>
         </v-row>
-</v-carousel-item>
-</v-carousel>
+      </split-carousel-item>
+    </div>
+  </split-carousel>
+  <v-footer></v-footer>
 </template>
 
-
+<script>
+import { SplitCarousel, SplitCarouselItem } from "vue-split-carousel";
+export default {
+  components: {
+    SplitCarousel,
+    SplitCarouselItem,
+  },
+};
+</script>
 <script setup>
 // const { data: daftar_ksm, } = await useFetch(() => 'https://satu.dev.rssa.id/items/daftar_ksm');
-  import { ref, onMounted, onUnmounted } from "vue";
-  
-  // ____________________________________________________________________
-  const waktuSekarang = ref({
-    tanggal: new Date().getDate(),
-    bulan: new Date().getMonth() + 1, // Bulan dimulai dari 0, jadi tambahkan 1
-    tahun: new Date().getFullYear(),
-    jam: new Date().getHours(),
-    menit: new Date().getMinutes(),
-    detik: new Date().getSeconds(),
-  });
-  
-  const formatDuaDigit = (nilai) => (nilai <= 9 ? `0${nilai}` : nilai);
-  
-  const updateWaktu = () => {
-    const sekarang = new Date();
-    waktuSekarang.value.tanggal = formatDuaDigit(sekarang.getDate());
-    waktuSekarang.value.bulan = formatDuaDigit(sekarang.getMonth() + 1);
-    waktuSekarang.value.tahun = sekarang.getFullYear();
-    waktuSekarang.value.jam = formatDuaDigit(sekarang.getHours());
-    waktuSekarang.value.menit = formatDuaDigit(sekarang.getMinutes());
-    waktuSekarang.value.detik = formatDuaDigit(sekarang.getSeconds());
-  };
-  
-  // let waktuIntervalId;
-  // onMounted(() => {
-  //   waktuIntervalId = setInterval(updateWaktu, 1000);
-  // });
-  
-  // onUnmounted(() => {
-  //   clearInterval(waktuIntervalId);
-  // });
-  
-  
-  
-const tanggalSekarang = new Date();
-  const tanggalKemarin = new Date(
-    tanggalSekarang.getFullYear(),
-    tanggalSekarang.getMonth(),
-    tanggalSekarang.getDate() - 7
-  )
-    .toISOString()
-    .split("T")[0];
-  const tanggalBesok = new Date(
-    tanggalSekarang.getFullYear(),
-    tanggalSekarang.getMonth(),
-    tanggalSekarang.getDate() + 7
-  )
-    .toISOString()
-    .split("T")[0];
-  
- 
-  
-  let tampungKSM = ref([]);
-  const updateKSM = async () => {
-    console.log("ini refresh");
-    tampungKSM.value = []; // Kosongkan array sebelum mengisi ulang
-    const _dataKSM = await $fetch(`https://satu.dev.rssa.id/items/daftar_ksm`);
-    const ksm = _dataKSM.data;
-    const _jdwlDokter = await $fetch(
-      `https://satu.dev.rssa.id/items/data_jadwal_jaga_dokter?fields=id,Nama_petugas,Ksm,Level.Nama_level_igd,Jaga_awal,Jaga_akhir&filter[Jaga_awal][_between]=[${tanggalKemarin}, ${tanggalBesok}]`
-    );
-    const jdwlDokters = _jdwlDokter.data;
-  
-    ksm.forEach((_ksm) => {
-      let idksm = _ksm["id"];
-  
-      let filterjdwl = jdwlDokters.filter((jadwal) => jadwal["Ksm"] === idksm);
-      if (filterjdwl && filterjdwl.length > 0) {
-        let tampiljadwalBaru = {
-          idksm: _ksm["id"],
-          ket_ksm: _ksm["Nama_ksm"],
-          jadwal: [],
-        };
-        const sekarang = new Date();
-        filterjdwl.forEach((jdwl) => {
-          const awal = new Date(jdwl.Jaga_awal);
-          const akhir = new Date(jdwl.Jaga_akhir);
-          if (sekarang >= awal && sekarang <= akhir) {
-            tampiljadwalBaru.jadwal.push(jdwl);
-          }
-        });
-        if (tampiljadwalBaru.jadwal.length > 0) {
-          tampungKSM.value.push(tampiljadwalBaru);
-        }
-      }
-    });
-    setTimeout(updateKSM, 60000); // Jadwalkan pembaruan berikutnya setiap 10 detik
-  };
-  
-  updateKSM(); // Panggilan awal untuk memulai proses
-  
-  // async function fetch(binding) {
-  //   Swal.fire({
-  //     position: "center",
-  //     icon: "success",
-  //     title: binding,
-  //     showConfirmButton: false,
-  //     timer: 2000,
-  //   });
-  // }
-  </script>
 
+import { ref, onMounted, onUnmounted } from "vue";
+
+
+
+const waktuSekarang = ref({
+  tanggal: new Date().getDate(),
+  bulan: new Date().getMonth() + 1, // Bulan dimulai dari 0, jadi tambahkan 1
+  tahun: new Date().getFullYear(),
+  jam: new Date().getHours(),
+  menit: new Date().getMinutes(),
+  detik: new Date().getSeconds(),
+});
+
+const formatDuaDigit = (nilai) => (nilai <= 9 ? '0${nilai}' : nilai);
+
+const updateWaktu = () => {
+  const sekarang = new Date();
+  waktuSekarang.value.tanggal = formatDuaDigit(sekarang.getDate());
+  waktuSekarang.value.bulan = formatDuaDigit(sekarang.getMonth() + 1);
+  waktuSekarang.value.tahun = sekarang.getFullYear();
+  waktuSekarang.value.jam = formatDuaDigit(sekarang.getHours());
+  waktuSekarang.value.menit = formatDuaDigit(sekarang.getMinutes());
+  waktuSekarang.value.detik = formatDuaDigit(sekarang.getSeconds());
+};
+
+const tanggalSekarang = new Date();
+const tanggalKemarin = new Date(
+  tanggalSekarang.getFullYear(),
+  tanggalSekarang.getMonth(),
+  tanggalSekarang.getDate() - 7
+)
+  .toISOString()
+  .split("T")[0];
+const tanggalBesok = new Date(
+  tanggalSekarang.getFullYear(),
+  tanggalSekarang.getMonth(),
+  tanggalSekarang.getDate() + 7
+)
+  .toISOString()
+  .split("T")[0];
+
+let tampungKSM = ref([]);
+const updateKSM = async () => {
+  console.log("ini refresh");
+  tampungKSM.value = []; // Kosongkan array sebelum mengisi ulang
+  const _dataKSM = await $fetch('https://satu.rssa.top/items/daftar_ksm');
+  const ksm = _dataKSM.data;
+  const _jdwlDokter = await $fetch(
+    'https://satu.rssa.top/items/data_jadwal_jaga_igd?fields=id,Dokter_jaga,KSM,Tingkat_supervisi,Tanggal_awal,Tanggal_akhir,Nama_dpjp.Gelar_belakang.daftar_gelar_belakang_id,Nama_dpjp.Gelar_depan.daftar_gelar_depan_id,Nama_dpjp.KTP.Nama_lengkap&filter[Tanggal_awal][_between]=[${tanggalKemarin}, ${tanggalBesok}]'
+  );
+
+  const jdwlDokters = _jdwlDokter.data;
+
+  // const gelarBelakang = await $fetch('https://satu.dev.rssa.id/items/daftar_gelar_belakang?limit=1000');
+  // let gelarBelakangs = gelarBelakang.data;
+
+  // const gelarDepan = await $fetch('https://satu.dev.rssa.id/items/daftar_gelar_depan?limit=1000');
+
+  ksm.forEach((_ksm) => {
+    let idksm = _ksm["id"];
+
+    let filterjdwl = jdwlDokters.filter((jadwal) => jadwal["KSM"] === idksm);
+    if (filterjdwl && filterjdwl.length > 0) {
+      let tampiljadwalBaru = {
+        idksm: _ksm["id"],
+        ket_ksm: _ksm["Nama_ksm"],
+        jadwal: [],
+      };
+      const sekarang = new Date();
+      filterjdwl.forEach((jdwl) => {
+        const awal = new Date(jdwl.Tanggal_awal);
+        const akhir = new Date(jdwl.Tanggal_akhir);
+        if (sekarang >= awal && sekarang <= akhir) {
+          tampiljadwalBaru.jadwal.push(jdwl);
+        }
+
+      //filter nama & gelar
+      // //memfilter id gelar belakang pada jadwal === id gelar pada API gelar belakang
+      // gelarBelakangs.forEach((_gelarBelakang) => {
+      //   let idGelarBelakang = _gelarBelakang["id"];
+      // //  let namaLengkap = jdwlDokters.Nama_dpjp.glm
+
+      //   //end of filter gelar
+
+      //   let filterGelarBelakang = jdwlDokters.filter((jadwal) => jadwal["Nama_dpjp.Gelar_belakang.daftar_gelar_belakang_id"] === idGelarBelakang);
+      //   if (filterGelarBelakang & filterGelarBelakang.length > 0) {
+          
+      //   }
+      // })
+
+        
+      });
+      if (tampiljadwalBaru.jadwal.length > 0) {
+        tampungKSM.value.push(tampiljadwalBaru);
+      }
+    }
+  });
+  setTimeout(updateKSM, 60000); // Jadwalkan pembaruan berikutnya setiap 10 detik
+};
+
+updateKSM(); // Panggilan awal untuk memulai proses
+</script>
+<style>
+#warnasheet {
+  background: rgb(0, 120, 255);
+
+  text-transform: uppercase;
+}
+#warnacard {
+  background: rgb(0, 120, 255);
+  background: radial-gradient(
+    circle,
+    rgba(0, 120, 255, 0.18531162464985995) 0%,
+    rgba(243, 251, 252, 1) 100%
+  );
+}
+
+/* #warnaitemcard {
+    background: white;
+  } */
+</style>
+
+<!-- Jadwal Jaga Dokter IGD 
+Buat API 
+- Get Nama lengkap
+- Get gelar depan
+- Get gelar belakang 
+
+Bikin source code untuk menyatukan Nama lengkap dan Gelar depan /Gelar belakang 
+logic nya seperti tampungKsm -->
